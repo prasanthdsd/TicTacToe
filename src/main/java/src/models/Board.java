@@ -1,5 +1,7 @@
 package src.models;
 
+import src.enums.CellState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,5 +35,15 @@ public class Board {
 
     public void setBoard(List<List<Cell>> board) {
         this.board = board;
+    }
+
+    public void print() {
+        for(List<Cell> row : board) {
+            System.out.print("|");
+            for(Cell cell : row) {
+                cell.display();
+            }
+            System.out.println();
+        }
     }
 }
