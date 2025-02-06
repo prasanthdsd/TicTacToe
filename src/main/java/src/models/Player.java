@@ -14,6 +14,10 @@ public class Player {
         this.playerType = playerType;
     }
 
+    Cell makeMove(){
+        return null;
+    }
+
     public String getName() {
         return name;
     }
