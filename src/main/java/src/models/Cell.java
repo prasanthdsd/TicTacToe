@@ -52,7 +52,7 @@ public class Cell {
             System.out.print(" - |");
         }
         else {
-            System.out.print(" "+getCellState()+" |");
+            System.out.print(" "+player.getSymbol().getaChar()+" |");
         }
     }
 }
