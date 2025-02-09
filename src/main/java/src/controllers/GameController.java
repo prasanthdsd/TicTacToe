@@ -23,13 +23,9 @@ public class GameController {
         game.printBoard();
     }
 
-    public Board undoProcess(Game game)
-    {
-        return null;
-    }
-
     public  void makeMove(Game game)
     {
+        game.makeMove();
 
     }
 
@@ -40,8 +36,13 @@ public class GameController {
 
     public  void printResult(Game game)
     {
+        System.out.println("Final result of the board : " + game.getBoard());
+
         game.printResult();
     }
 
-
+    public void undoProcess(Game game)
+    {
+        game.undo();
+    }
 }

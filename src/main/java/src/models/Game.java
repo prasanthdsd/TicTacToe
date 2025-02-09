@@ -113,9 +113,13 @@ public class Game {
     public void makeMove()
     {
         Player currentPlayer = players.get(currertMoveplayerIndex);
+        System.out.println("Current player is " + currentPlayer.getName());
 
-        Cell proposedCell = currentPlayer.makeMove();
+        Cell proposedCell = currentPlayer.makeMove(board);
+
+        System.out.println("move made at row " + proposedCell.getRow() + " col " + proposedCell.getCol());
         if(!validateMove(proposedCell)){
+            System.out.println("Invalid move.. Please Try again");
             return;
         }
 
@@ -148,11 +152,35 @@ public class Game {
     public void printResult(){
         if(this.gameStatus == GameStatus.FINISHED){
             System.out.println("Game is over!!!");
-            System.out.println("Winner is :" + this.winner);
+            System.out.println("Winner is :" + this.winner.getName());
         }
         else {
             System.out.println("Game is Draw!!!");
         }
+    }
+
+    public void undo()
+    {
+        if(moves.size() == 0){
+            System.out.println("No Moves to undo!!!");
+            return;
+        }
+
+        Move lastMove = moves.get(moves.size()-1);
+
+        for(WinningStrategy winningStrategy : winningStartegies){
+            winningStrategy.HandleUndo(lastMove);
+        }
+
+        Cell cellInBoard = lastMove.getCell();
+        cellInBoard.setCellState(CellState.EMPTY);
+        cellInBoard.setPlayer(null);
+
+        moves.remove(lastMove);
+
+        currertMoveplayerIndex--;
+        currertMoveplayerIndex += players.size();
+        currertMoveplayerIndex %= players.size();
     }
 
     public static class Builder {
